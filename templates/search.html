@@ -1,0 +1,31 @@
+{% extends "flatpages/default.html" %}
+
+{% load custom_filters %}
+
+{% block css %}
+{% load static %}
+<link href="{% static '/css/styles2.css' %}" rel="stylesheet" />
+{% endblock css %}
+
+{% block content %}
+<h1>ПОИСК НОВОСТИ</h1>
+
+<form method="GET">
+    {{ filter.form }} <!-- Форму от фильтров за нас сделает Django. А вот кнопку, увы, придётся делать самому -->
+    <input type="submit" value="Найти">
+</form>
+
+{% if posts %}
+    {% for post in posts %}
+        <div>
+            <a href="/news/{{post.pk}}">
+                <h2>{{ post.title }}</h2></a>
+                <date>{{ post.dateCreation }}</date>
+                <p>{{ post.text|truncatechars:50|cenzor}}</p>
+        </div>
+    {% endfor %}
+
+{% else %}
+    <h1>Новости не нашли</h1>
+{% endif %}
+{% endblock content%}

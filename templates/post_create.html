@@ -1,0 +1,15 @@
+{% extends "flatpages/default.html" %}
+ 
+ 
+{% block content %}
+    {% if limit %}
+        <h3>Ваш дневной лимит на количество созданных статей исчерпан.</h3>
+    {% else %}
+        <h3>Создайте статью</h3>
+        <form method="POST">
+            {% csrf_token %} 
+            {{ form.as_p }}
+            <input type="submit" value="Добавить новость">
+        </form>
+    {% endif %}
+{% endblock content %}
