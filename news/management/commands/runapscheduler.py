@@ -66,7 +66,7 @@ def my_job():
         msg = EmailMultiAlternatives(
                     subject=f'Новости за последнюю неделю.',
                     from_email='stpab18@yandex.ru',
-                    to=['stpab@mail.ru'],
+                    to=[User.objects.get(username=user).email],
                 )
         msg.attach_alternative(html_content, "text/html") # добавляем html
 
